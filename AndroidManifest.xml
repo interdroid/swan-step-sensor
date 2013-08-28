@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="interdroid.swan.step_sensor"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <application
+        android:debuggable="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".StepSensor$ConfigurationActivity"
+            android:exported="true" />
+
+        <service
+            android:name=".StepSensor"
+            android:exported="true"
+            android:icon="@drawable/icon_steps" >
+            <meta-data
+                android:name="entityId"
+                android:value="step" />
+            <meta-data
+                android:name="valuePaths"
+                android:value="today" />
+            <meta-data
+                android:name="authority"
+                android:value="interdroid.swan.step_sensor.step" />
+            <meta-data
+                android:name="min_steps"
+                android:value="1" />
+            <meta-data
+                android:name="min_time"
+                android:value="10000" />
+            <meta-data
+                android:name="units"
+                android:value="" />
+
+            <intent-filter>
+                <action android:name="interdroid.swan.sensor.DISCOVER" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name="interdroid.swan.step_sensor.StepSensor$Provider"
+            android:authorities="interdroid.swan.step_sensor.step" />
+    </application>
+
+    <uses-sdk android:minSdkVersion="7" />
+
+    <uses-permission android:name="interdroid.vdb.permission.READ_DATABASE" />
+    <uses-permission android:name="interdroid.vdb.permission.WRITE_DATABASE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+</manifest>
